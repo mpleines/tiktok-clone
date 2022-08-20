@@ -1,0 +1,13 @@
+.wrapper {
+  padding: 24px 0px;
+  width: 350px;
+  position: fixed;
+  top: 60px;
+  bottom: 0;
+}
+
+.forYouSection {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid lightgrey;
+}

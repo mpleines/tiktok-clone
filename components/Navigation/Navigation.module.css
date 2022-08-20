@@ -1,0 +1,17 @@
+.wrapper {
+  background: white;
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  padding: 0px 16px;
+
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

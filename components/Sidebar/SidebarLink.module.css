@@ -1,0 +1,17 @@
+.wrapper {
+  padding: 12px;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wrapper:hover {
+  background: rgba(22, 24, 35, 0.03);
+}
+
+.title {
+  color: var(--color);
+}
