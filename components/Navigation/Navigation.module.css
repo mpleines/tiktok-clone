@@ -10,8 +10,20 @@
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12);
 }
 
-.inner {
+.flex {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.avatarLink {
+  display: flex;
+  align-items: center;
 }
