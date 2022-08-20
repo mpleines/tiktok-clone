@@ -1,4 +1,5 @@
 import { FunctionComponent, ReactNode } from 'react';
+import Button from '../Button/Button';
 import MaxWidth from '../MaxWidth/MaxWidth';
 import styles from './Navigation.module.css';
 
@@ -13,7 +14,7 @@ const Navigation: FunctionComponent<NavigationProps> = () => {
             <h1 className={styles.title}>Tik Tok</h1>
           </div>
           <div>
-            <button>Hochladen</button>
+            <Button title="Hochladen" onClick={() => null} />
           </div>
         </div>
       </MaxWidth>

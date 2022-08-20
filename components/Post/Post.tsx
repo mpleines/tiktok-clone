@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import Button from '../Button/Button';
 import styles from './Post.module.css';
 
 interface PostProps {}
@@ -10,7 +11,7 @@ const Post: FunctionComponent<PostProps> = () => {
         <div className={styles.title}>
           <h2>Maik Pleines</h2>
           <div>
-            <button className={styles.follow}>Folgen</button>
+            <Button title="Folgen" onClick={() => null} />
           </div>
         </div>
         <div className={styles.tags}>

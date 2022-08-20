@@ -35,17 +35,3 @@
   border-radius: 12px;
   object-fit: cover;
 }
-
-.follow {
-  padding: 8px 16px;
-  font-weight: 700;
-  background: white;
-  color: var(--primary-color);
-  border: 1px solid var(--primary-color);
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.follow:hover {
-  background: rgba(254, 44, 85, 0.06);
-}
