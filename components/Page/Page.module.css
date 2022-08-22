@@ -8,3 +8,10 @@
   justify-content: center;
   gap: 1rem;
 }
+
+.notLoggedIn {
+  display: flex;
+
+  flex-direction: column;
+  gap: 16px;
+}

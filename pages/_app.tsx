@@ -4,10 +4,11 @@ import Navigation from '../components/Navigation/Navigation';
 import Sidebar from '../components/Sidebar/Sidebar';
 import styles from '../styles/Home.module.css';
 import MaxWidth from '../components/MaxWidth/MaxWidth';
+import { SessionProvider } from 'next-auth/react';
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
-    <>
+    <SessionProvider session={session}>
       <Navigation />
       <MaxWidth>
         <div className={styles.layout}>
@@ -17,7 +18,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       </MaxWidth>
 
       <footer className={styles.footer}></footer>
-    </>
+    </SessionProvider>
   );
 }
 
