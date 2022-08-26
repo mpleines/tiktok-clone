@@ -1,9 +1,7 @@
 import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/router';
 import { FunctionComponent, ReactNode } from 'react';
-import Button from '../Button/Button';
 import styles from './Page.module.css';
-import { signIn } from 'next-auth/react';
+import MaxWidth from '../MaxWidth/MaxWidth';
 
 interface PageProps {
   children?: ReactNode;
@@ -12,15 +10,15 @@ interface PageProps {
 
 const Page: FunctionComponent<PageProps> = ({ children, sessionRequired }) => {
   const { data: session } = useSession();
+
   return (
     <main className={styles.wrapper}>
       {!session && sessionRequired ? (
-        <div className={styles.notLoggedIn}>
-          <span>You are not logged in.</span>
-          <Button title="Sign In With Google" onClick={signIn} />
-        </div>
+        <span>You are not logged in</span>
       ) : (
-        children
+        <div className={styles.layout}>
+          <MaxWidth>{children}</MaxWidth>
+        </div>
       )}
     </main>
   );

@@ -1,13 +1,18 @@
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
-import { FunctionComponent, ReactNode } from 'react';
+import { FunctionComponent } from 'react';
 import Avatar from '../Avatar/Avatar';
 import Button from '../Button/Button';
 import MaxWidth from '../MaxWidth/MaxWidth';
 import styles from './Navigation.module.css';
 
-interface NavigationProps {}
+interface NavigationProps {
+  openLoginModal: () => void;
+}
 
-const Navigation: FunctionComponent<NavigationProps> = () => {
+const Navigation: FunctionComponent<NavigationProps> = ({ openLoginModal }) => {
+  const session = useSession();
+
   return (
     <nav className={styles.wrapper}>
       <MaxWidth>
@@ -16,12 +21,18 @@ const Navigation: FunctionComponent<NavigationProps> = () => {
             <h1 className={styles.title}>Tik Tok</h1>
           </div>
           <div className={styles.actions}>
-            <Button title="Hochladen" onClick={() => null} />
-            <Link href="/settings">
-              <a className={styles.avatarLink}>
-                <Avatar />
-              </a>
-            </Link>
+            {session.data == null ? (
+              <Button title="Anmelden" onClick={openLoginModal} />
+            ) : (
+              <>
+                <Button title="Hochladen" onClick={() => null} />
+                <Link href="/settings">
+                  <a className={styles.avatarLink}>
+                    <Avatar />
+                  </a>
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </MaxWidth>

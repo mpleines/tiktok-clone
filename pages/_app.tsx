@@ -5,11 +5,15 @@ import Sidebar from '../components/Sidebar/Sidebar';
 import styles from '../styles/Home.module.css';
 import MaxWidth from '../components/MaxWidth/MaxWidth';
 import { SessionProvider } from 'next-auth/react';
+import { useState } from 'react';
+import Login from '../components/Login/Login';
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+  const [showLoginModal, setShowLoginModal] = useState(false);
+
   return (
     <SessionProvider session={session}>
-      <Navigation />
+      <Navigation openLoginModal={() => setShowLoginModal(true)} />
       <MaxWidth>
         <div className={styles.layout}>
           <Sidebar />
@@ -18,6 +22,8 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
       </MaxWidth>
 
       <footer className={styles.footer}></footer>
+
+      {showLoginModal && <Login onClose={() => setShowLoginModal(false)} />}
     </SessionProvider>
   );
 }
