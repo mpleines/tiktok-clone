@@ -31,7 +31,10 @@ const Login: FunctionComponent<LoginProps> = ({ onClose }) => {
               <h1>Bei Tik Tok anmelden</h1>
             </div>
             <div className={styles.item}>
-              <Button title="Mit Google anmelden" onClick={signIn} />
+              <Button
+                title="Mit Google anmelden"
+                onClick={() => signIn('google')}
+              />
             </div>
           </div>
         </div>,
