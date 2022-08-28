@@ -1,5 +1,6 @@
 import { signOut, useSession } from 'next-auth/react';
 import { FunctionComponent } from 'react';
+import BottomActions from '../components/BottomActions/BottomActions';
 import Button from '../components/Button/Button';
 import Input from '../components/Input/Input';
 import Page from '../components/Page/Page';
@@ -12,7 +13,7 @@ const Settings: FunctionComponent<SettingsProps> = () => {
 
   return (
     <Page sessionRequired>
-      <h2>Profile</h2>
+      <h2>Settings</h2>
 
       <Input
         label="Username"
@@ -26,10 +27,10 @@ const Settings: FunctionComponent<SettingsProps> = () => {
         onChange={() => null}
         type="text"
       />
-      <div>
+      <BottomActions>
         <Button title="Save" onClick={() => null} />
         <Button title="Logout" onClick={signOut} />
-      </div>
+      </BottomActions>
     </Page>
   );
 };

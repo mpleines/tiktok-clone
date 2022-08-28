@@ -1,0 +1,5 @@
+.wrapper {
+  display: flex;
+  justify-content: var(--justify);
+  gap: 16px;
+}

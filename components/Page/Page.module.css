@@ -1,17 +1,16 @@
 .wrapper {
-  margin-top: 16px;
-  margin-left: 350px;
+  margin: 16px 32px 0px 350px;
   padding-left: 16px;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
+  flex: 1;
   gap: 1rem;
 }
 
 .notLoggedIn {
   display: flex;
-
   flex-direction: column;
   gap: 16px;
 }
