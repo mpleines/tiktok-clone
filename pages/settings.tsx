@@ -29,7 +29,7 @@ const Settings: FunctionComponent<SettingsProps> = () => {
       />
       <BottomActions>
         <Button title="Save" onClick={() => null} />
-        <Button title="Logout" onClick={signOut} />
+        <Button title="Logout" onClick={() => signOut({ callbackUrl: '/' })} />
       </BottomActions>
     </Page>
   );

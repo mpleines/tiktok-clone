@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
+import { signOut } from 'next-auth/react';
 
 const userNameChars = [
   'a',
