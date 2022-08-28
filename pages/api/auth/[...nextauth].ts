@@ -1,7 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
-import { signOut } from 'next-auth/react';
 
 const userNameChars = [
   'a',
@@ -92,13 +91,20 @@ export default NextAuth({
       const prismaClient = new PrismaClient();
       const existingUser = await prismaClient.user.findUnique({
         where: { email: session.user.email },
+        include: { posts: true },
       });
 
       if (existingUser?.username == null) {
         return session;
       }
 
-      session.user.username = existingUser?.username;
+      session.user = {
+        ...session.user,
+        id: existingUser.id,
+        username: existingUser?.username,
+        fullname: existingUser.name,
+        posts: existingUser.posts,
+      };
 
       return session;
     },

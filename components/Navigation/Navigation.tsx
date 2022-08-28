@@ -1,5 +1,6 @@
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { FunctionComponent } from 'react';
 import Avatar from '../Avatar/Avatar';
 import Button from '../Button/Button';
@@ -12,6 +13,7 @@ interface NavigationProps {
 
 const Navigation: FunctionComponent<NavigationProps> = ({ openLoginModal }) => {
   const session = useSession();
+  const router = useRouter();
 
   return (
     <nav className={styles.wrapper}>
@@ -25,7 +27,10 @@ const Navigation: FunctionComponent<NavigationProps> = ({ openLoginModal }) => {
               <Button title="Anmelden" onClick={openLoginModal} />
             ) : (
               <>
-                <Button title="Hochladen" onClick={() => null} />
+                <Button
+                  title="Hochladen"
+                  onClick={() => router.push('/upload')}
+                />
                 <Link href="/settings">
                   <a className={styles.avatarLink}>
                     <Avatar />

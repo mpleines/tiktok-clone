@@ -15,4 +15,16 @@ model User {
   email     String   @unique
   name      String?
   username  String?
+  posts     Post[]
+}
+
+model Post {
+    id          Int         @id @default(autoincrement())
+    createdAt   DateTime    @default(now())
+    updatedAt   DateTime    @updatedAt
+    description String      @db.VarChar(255)
+    videoUrl    String
+    author      User?       @relation(fields: [authorId], references: [id])
+    authorId    Int?
+    authorName  String?
 }
