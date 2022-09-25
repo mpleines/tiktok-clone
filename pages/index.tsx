@@ -10,14 +10,13 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json());
 const Home: NextPage = () => {
   const { data, error } = useSWR<PostType[]>('/api/posts', fetcher);
 
-  if (!data) return <span>Loading...</span>;
-
   if (error) return <span>Error</span>;
 
   return (
     <div className={styles.container}>
       <Page sessionRequired>
-        {data.map((post) => (
+        {!data && <span>Loading...</span>}
+        {data?.map((post) => (
           <Post
             key={post.id}
             author={post.authorName ?? ''}

@@ -28,7 +28,7 @@ const Login: FunctionComponent<LoginProps> = ({ onClose }) => {
               </button>
             </div>
             <div className={styles.item}>
-              <h1>Bei Tik Tok anmelden</h1>
+              <h1>Bei ShigTok anmelden</h1>
             </div>
             <div className={styles.item}>
               <Button

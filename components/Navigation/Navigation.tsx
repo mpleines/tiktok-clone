@@ -20,7 +20,7 @@ const Navigation: FunctionComponent<NavigationProps> = ({ openLoginModal }) => {
       <MaxWidth>
         <div className={styles.flex}>
           <div>
-            <h1 className={styles.title}>Tik Tok</h1>
+            <h1 className={styles.title}>ShigTok</h1>
           </div>
           <div className={styles.actions}>
             {session.data == null ? (

@@ -1,38 +1,37 @@
+import Link from 'next/link';
 import { FunctionComponent } from 'react';
 import Button from '../Button/Button';
+import Video from '../Video/Video';
 import styles from './Post.module.css';
 
 interface PostProps {
   description: string;
-  author: string;
   videoUrl: string;
+  author?: string;
+  tags?: string[];
 }
+
+const TEST_VIDEO_URL =
+  'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
 
 const Post: FunctionComponent<PostProps> = ({
   description,
   author,
   videoUrl,
+  tags,
 }) => {
   return (
     <div className={styles.wrapper}>
-      <div>
-        <div className={styles.title}>
-          <h2>{author}</h2>
-          <div>
-            <Button title="Folgen" onClick={() => null} />
-          </div>
-        </div>
-        <div className={styles.tags}>{description}</div>
-        <div className={styles.videoWrapper}>
-          <video
-            muted={true}
-            autoPlay={true}
-            loop={true}
-            className={styles.video}
-            src={videoUrl}
-          />
-        </div>
+      <div className={styles.header}>
+        <h3 className={styles.author}>
+          <Link href="">
+            <a className={styles.link}>{author}</a>
+          </Link>
+        </h3>
+        <Button onClick={() => null} title="Folgen" />
       </div>
+      <div className={styles.description}>{description}</div>
+      <Video src={TEST_VIDEO_URL} />
     </div>
   );
 };

@@ -1,0 +1,27 @@
+.videoWrapper {
+  isolation: isolate;
+  position: relative;
+}
+
+.video {
+  height: 450px;
+  width: 100%;
+  max-width: 400px;
+
+  display: block;
+
+  border-radius: 12px;
+  object-fit: cover;
+  background: rgb(0 0 0 / 12%);
+}
+
+.playButton {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  background: none;
+  border: none;
+  color: black;
+  cursor: pointer;
+  z-index: 1;
+}

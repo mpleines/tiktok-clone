@@ -9,6 +9,11 @@
   gap: 1rem;
 }
 
+.smallWrapper {
+  composes: wrapper;
+  margin: 16px 32px 0px 72px;
+}
+
 .notLoggedIn {
   display: flex;
   flex-direction: column;
