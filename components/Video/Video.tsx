@@ -12,6 +12,40 @@ const Video: FunctionComponent<VideoProps> = ({ src }) => {
   );
 
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        setIsVisible(entry.isIntersecting);
+      },
+      {
+        threshold: 1,
+      }
+    );
+
+    if (videoElement) {
+      observer.observe(videoElement);
+    }
+
+    return () => {
+      if (videoElement) {
+        observer.unobserve(videoElement);
+      }
+    };
+  }, [videoElement]);
+
+  useEffect(() => {
+    if (isVisible) {
+      videoElement!.currentTime = 0;
+      videoElement?.play();
+      setIsPlaying(true);
+    } else {
+      videoElement?.pause();
+      setIsPlaying(false);
+    }
+  }, [isVisible, videoElement]);
 
   const togglePausePlay = async () => {
     if (videoElement == null) {
