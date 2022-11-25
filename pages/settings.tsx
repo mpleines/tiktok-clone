@@ -12,27 +12,19 @@ const Settings: FunctionComponent<SettingsProps> = () => {
   const session = useSession();
   const user = session?.data?.user;
 
-  const [username, setUsername] = useState<string>();
-  const [fullName, setFullName] = useState<string>();
-
-  useEffect(() => {
-    setUsername(user.username);
-    setFullName(user.name);
-  }, [user]);
-
   return (
     <Page sessionRequired>
       <h1>Settings</h1>
 
       <Input
         label="Username"
-        value={username}
+        value={user?.username}
         onChange={() => null}
         type="text"
       />
       <Input
         label="Full Name"
-        value={fullName}
+        value={user?.name}
         onChange={() => null}
         type="text"
       />

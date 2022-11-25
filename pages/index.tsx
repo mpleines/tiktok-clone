@@ -1,7 +1,6 @@
 import type { NextPage } from 'next';
 import Page from '../components/Page/Page';
 import Post from '../components/Post/Post';
-import styles from '../styles/Home.module.css';
 import useSWR from 'swr';
 import { Post as PostType } from '@prisma/client';
 
@@ -13,19 +12,17 @@ const Home: NextPage = () => {
   if (error) return <span>Error</span>;
 
   return (
-    <div className={styles.container}>
-      <Page sessionRequired>
-        {!data && <span>Loading...</span>}
-        {data?.map((post) => (
-          <Post
-            key={post.id}
-            author={post.authorName ?? ''}
-            description={post.description}
-            videoUrl={post.videoUrl}
-          />
-        ))}
-      </Page>
-    </div>
+    <Page sessionRequired>
+      {!data && <span>Loading...</span>}
+      {data?.map((post) => (
+        <Post
+          key={post.id}
+          author={post.authorName ?? ''}
+          description={post.description}
+          videoUrl={post.videoUrl}
+        />
+      ))}
+    </Page>
   );
 };
 

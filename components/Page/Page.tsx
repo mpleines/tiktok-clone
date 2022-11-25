@@ -10,13 +10,20 @@ interface PageProps {
 }
 
 const Page: FunctionComponent<PageProps> = ({ children, sessionRequired }) => {
-  const { data: session } = useSession();
+  const { status } = useSession();
   const isSmallScreen = useMediaQuery('(max-width: 700px)');
 
   return (
     <main className={isSmallScreen ? styles.smallWrapper : styles.wrapper}>
-      {!session && sessionRequired ? (
-        <span>You are not logged in</span>
+      {status === 'loading' ? null : status === 'unauthenticated' &&
+        sessionRequired ? (
+        <div className={styles.layout}>
+          <h1>Welcome to ShigTok</h1>
+          <div className={styles.info}>
+            <p>ShigTok is a place to share and watch videos.</p>
+            <p>You can join us by using your Google Account to login</p>
+          </div>
+        </div>
       ) : (
         <div className={styles.layout}>
           <MaxWidth>{children}</MaxWidth>

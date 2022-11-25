@@ -6,7 +6,9 @@ interface FollowingProps {}
 const Following: FunctionComponent<FollowingProps> = () => {
   return (
     <Page sessionRequired>
-      <span> Coming soon...</span>
+      <div>
+        <span> Coming soon...</span>
+      </div>
     </Page>
   );
 };
