@@ -12,7 +12,7 @@ interface PostProps {
 }
 
 const TEST_VIDEO_URL =
-  'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
+  'https://f004.backblazeb2.com/file/fikfok/test_video.mp4';
 
 const Post: FunctionComponent<PostProps> = ({
   description,
