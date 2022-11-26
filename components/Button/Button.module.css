@@ -14,5 +14,5 @@
 }
 
 .primary:hover {
-  background: rgba(254, 44, 85, 0.06);
+  background: rgba(var(--primary-color-rgb), 0.1);
 }

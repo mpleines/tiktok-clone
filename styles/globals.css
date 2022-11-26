@@ -22,8 +22,10 @@ fieldset {
 }
 
 :root {
-  --primary-color-rgb: 254, 44, 85;
-  --secondary-color: 22, 24, 35;
-  --primary-color: rgba(254, 44, 85, 1);
-  --secondary-color: rgba(22, 24, 35, 0.06);
+  --primary-color-rgb: 147, 125, 248;
+  --secondary-color-rgb: 255, 110, 0;
+  --grey-rgb: 22, 24, 35;
+  --primary-color: rgba(var(--primary-color-rgb), 1);
+  --secondary-color: rgba(var(--secondary-color-rgb), 1);
+  --grey: rgba(var(--grey-rgb), 0.06);
 }
