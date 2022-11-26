@@ -23,8 +23,8 @@ const Sidebar: FunctionComponent<SidebarProps> = () => {
   return (
     <aside className={styles.wrapper}>
       <div className={styles.forYouSection}>
-        <SidebarLink title="Für dich" href="/" Icon={FiHome} />
-        <SidebarLink title="Folge ich" href="/following" Icon={FiUser} />
+        <SidebarLink title="For You" href="/" Icon={FiHome} />
+        <SidebarLink title="Following" href="/following" Icon={FiUser} />
       </div>
     </aside>
   );

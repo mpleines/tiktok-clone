@@ -28,11 +28,11 @@ const Login: FunctionComponent<LoginProps> = ({ onClose }) => {
               </button>
             </div>
             <div className={styles.item}>
-              <h1>Bei ShigTok anmelden</h1>
+              <h1>Sign in to ShigTok</h1>
             </div>
             <div className={styles.item}>
               <Button
-                title="Mit Google anmelden"
+                title="Sign In with Google"
                 onClick={() => signIn('google')}
               />
             </div>

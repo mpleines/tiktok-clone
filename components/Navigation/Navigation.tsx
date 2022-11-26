@@ -24,7 +24,7 @@ const Navigation: FunctionComponent<NavigationProps> = ({ openLoginModal }) => {
           </div>
           <div className={styles.actions}>
             {session.data == null ? (
-              <Button title="Anmelden" onClick={openLoginModal} />
+              <Button title="Sign In" onClick={openLoginModal} />
             ) : (
               <>
                 <Button

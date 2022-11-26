@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
-import Page from '../components/Page/Page';
-import styles from './welcome.module.css';
+import Page from '../Page/Page';
+import styles from './Welcome.module.css';
 
 interface WelcomeProps {}
 

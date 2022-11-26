@@ -3,6 +3,7 @@ import Page from '../components/Page/Page';
 import Post from '../components/Post/Post';
 import useSWR from 'swr';
 import { Post as PostType } from '@prisma/client';
+import RouteGuard from '../components/RouteGuard/RouteGuard';
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -12,17 +13,19 @@ const Home: NextPage = () => {
   if (error) return <span>Error</span>;
 
   return (
-    <Page sessionRequired>
-      {!data && <span>Loading...</span>}
-      {data?.map((post) => (
-        <Post
-          key={post.id}
-          author={post.authorName ?? ''}
-          description={post.description}
-          videoUrl={post.videoUrl}
-        />
-      ))}
-    </Page>
+    <RouteGuard>
+      <Page>
+        {!data && <span>Loading...</span>}
+        {data?.map((post) => (
+          <Post
+            key={post.id}
+            author={post.authorName ?? ''}
+            description={post.description}
+            videoUrl={post.videoUrl}
+          />
+        ))}
+      </Page>
+    </RouteGuard>
   );
 };
 
