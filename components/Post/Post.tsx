@@ -11,9 +11,6 @@ interface PostProps {
   tags?: string[];
 }
 
-const TEST_VIDEO_URL =
-  'https://f004.backblazeb2.com/file/fikfok/test_video.mp4';
-
 const Post: FunctionComponent<PostProps> = ({
   description,
   author,
@@ -31,7 +28,7 @@ const Post: FunctionComponent<PostProps> = ({
         <Button onClick={() => null} title="Folgen" />
       </div>
       <div className={styles.description}>{description}</div>
-      <Video src={TEST_VIDEO_URL} />
+      <Video src={videoUrl} />
     </div>
   );
 };
