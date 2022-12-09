@@ -1,4 +1,5 @@
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 import { ChangeEvent, FunctionComponent, useId, useState } from 'react';
 import Button from '../components/Button/Button';
 import Camera from '../components/Camera/Camera';
@@ -23,6 +24,7 @@ const Upload: FunctionComponent<UploadProps> = () => {
   const [uploadingState, setUploadingState] = useState<'loading' | 'error' | 'success'>();
   const [showCamera, setShowCamera] = useState(false);
   const id = useId();
+  const router = useRouter();
 
   const handleUpload = async () => {
     if (videoBlob == null) {
@@ -57,6 +59,7 @@ const Upload: FunctionComponent<UploadProps> = () => {
       }),
     })
       .then(() => setUploadingState('success'))
+      .then(() => router.push('/'))
       .catch((err) => setUploadingState('error'));
   };
 
