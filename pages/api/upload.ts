@@ -12,12 +12,17 @@ export default async function handler(
   const { base64, mimeType } = file;
   const post = rest;
 
+  if (process.env.BACKBLAZE_APP_KEY_ID == null || process.env.BACKBLAZE_APP_KEY == null) {
+    console.error('Backlaze not configured');
+    return;
+  }
+
   try {
     // upload video to backblaze
     // FIXME: do not push this! move to .env files
     const backblaze = new B2({
-      applicationKeyId: '004896f07f8979a0000000001',
-      applicationKey: 'K004hFiR+epD5TLkRGJXwUUOFBNiTDQ',
+      applicationKeyId: process.env.BACKBLAZE_APP_KEY_ID,
+      applicationKey: process.env.BACKBLAZE_APP_KEY,
     });
 
     await backblaze.authorize();

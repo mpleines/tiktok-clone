@@ -71,8 +71,10 @@ const Upload: FunctionComponent<UploadProps> = () => {
       {showCamera && (
         <Camera showCamera={showCamera} onCancel={() => setShowCamera(false)} handleChange={setVideoBlob} />
       )}
-      <Button title="Record a Video" onClick={() => setShowCamera(true)} />
-      <Button title="Post Video" onClick={handleUpload} />
+      <div style={{ display: 'flex', gap: '8px' }}>
+        <Button title="Record a Video" onClick={() => setShowCamera(true)} />
+        <Button title="Post Video" onClick={handleUpload} />
+      </div>
       {uploadingState === 'loading' && <span>Loading</span>}
     </Page>
   );
