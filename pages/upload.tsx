@@ -1,6 +1,7 @@
 import { useSession } from 'next-auth/react';
-import { ChangeEvent, FunctionComponent, useState } from 'react';
+import { ChangeEvent, FunctionComponent, useId, useState } from 'react';
 import Button from '../components/Button/Button';
+import Camera from '../components/Camera/Camera';
 import Input from '../components/Input/Input';
 import Page from '../components/Page/Page';
 
@@ -18,10 +19,18 @@ export function toBase64(file: Blob): Promise<string> {
 const Upload: FunctionComponent<UploadProps> = () => {
   const session = useSession();
   const [description, setDescription] = useState<string>();
-  const [file, setFile] = useState<File | undefined>();
+  const [videoBlob, setVideoBlob] = useState<Blob>();
   const [uploadingState, setUploadingState] = useState<'loading' | 'error' | 'success'>();
+  const [showCamera, setShowCamera] = useState(false);
+  const id = useId();
 
   const handleUpload = async () => {
+    if (videoBlob == null) {
+      console.error('Upload not possible, no video found');
+    }
+
+    const file = new File([videoBlob!], id);
+
     if (file == null) {
       return;
     }
@@ -51,23 +60,19 @@ const Upload: FunctionComponent<UploadProps> = () => {
       .catch((err) => setUploadingState('error'));
   };
 
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files != null && e.target.files.length === 0) {
-      setFile(undefined);
-      return;
-    }
-
-    const file = e.target.files![0];
-    setFile(file);
-  }
-
   return (
     <Page>
       <h1>Upload a Video</h1>
       <p>Upload a new Video with your account</p>
+      {videoBlob && (
+        <video src={URL.createObjectURL(videoBlob)} autoPlay loop style={{ width: '100%' }}/>
+      )}
       <Input label="Beschreibung" onChange={setDescription} />
-      <input type="file" onChange={handleFileChange} accept="video/*" />
-      <Button title="Veröffentlichen" onClick={handleUpload} />
+      {showCamera && (
+        <Camera showCamera={showCamera} onCancel={() => setShowCamera(false)} handleChange={setVideoBlob} />
+      )}
+      <Button title="Record a Video" onClick={() => setShowCamera(true)} />
+      <Button title="Post Video" onClick={handleUpload} />
       {uploadingState === 'loading' && <span>Loading</span>}
     </Page>
   );

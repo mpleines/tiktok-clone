@@ -1,0 +1,36 @@
+.wrapper {
+  z-index: 2;
+  position: fixed;
+  background: grey;
+}
+
+.camera {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.hidden {
+  composes: wrapper;
+  display: none;
+}
+
+.actions {
+  position: fixed;
+  bottom: 60px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.topActions {
+  position: fixed;
+  top: 0;
+  right: 16px;
+  top: 16px;
+}
+
