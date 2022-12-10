@@ -31,10 +31,8 @@ const Navigation: FunctionComponent<NavigationProps> = ({ openLoginModal }) => {
                   title="Hochladen"
                   onClick={() => router.push('/upload')}
                 />
-                <Link href="/settings">
-                  <a className={styles.avatarLink}>
-                    <Avatar />
-                  </a>
+                <Link href="/settings" className={styles.avatarLink}>
+                  <Avatar />
                 </Link>
               </>
             )}

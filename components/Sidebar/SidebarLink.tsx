@@ -23,27 +23,26 @@ const SidebarLink: FunctionComponent<SidebarLinkProps> = ({
   const color = isActive ? 'var(--primary-color)' : 'initial';
 
   return (
-    <Link href={href}>
-      <a
-        className={styles.wrapper}
-        style={{ justifyContent: isSmallScreen ? 'center' : 'initial' }}
-      >
-        <>
-          {Icon && <Icon color={color} />}
-          {title && (
-            <div
-              className={styles.title}
-              style={
-                {
-                  '--color': color,
-                } as React.CSSProperties
-              }
-            >
-              {title}
-            </div>
-          )}
-        </>
-      </a>
+    <Link
+      href={href}
+      className={styles.wrapper}
+      style={{ justifyContent: isSmallScreen ? 'center' : 'initial' }}
+    >
+      <>
+        {Icon && <Icon color={color} />}
+        {title && (
+          <div
+            className={styles.title}
+            style={
+              {
+                '--color': color,
+              } as React.CSSProperties
+            }
+          >
+            {title}
+          </div>
+        )}
+      </>
     </Link>
   );
 };

@@ -21,8 +21,8 @@ const Post: FunctionComponent<PostProps> = ({
     <div className={styles.wrapper}>
       <div className={styles.header}>
         <h3 className={styles.author}>
-          <Link href="">
-            <a className={styles.link}>{author}</a>
+          <Link href="" className={styles.link}>
+            {author}
           </Link>
         </h3>
         <Button onClick={() => null} title="Folgen" />
