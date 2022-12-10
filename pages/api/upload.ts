@@ -18,8 +18,6 @@ export default async function handler(
   }
 
   try {
-    // upload video to backblaze
-    // FIXME: do not push this! move to .env files
     const backblaze = new B2({
       applicationKeyId: process.env.BACKBLAZE_APP_KEY_ID,
       applicationKey: process.env.BACKBLAZE_APP_KEY,

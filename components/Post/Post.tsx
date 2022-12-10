@@ -9,12 +9,14 @@ interface PostProps {
   videoUrl: string;
   author?: string;
   tags?: string[];
+  onDelete?: () => void;
 }
 
 const Post: FunctionComponent<PostProps> = ({
   description,
   author,
   videoUrl,
+  onDelete,
   tags,
 }) => {
   return (
@@ -25,7 +27,11 @@ const Post: FunctionComponent<PostProps> = ({
             {author}
           </Link>
         </h3>
-        <Button onClick={() => null} title="Folgen" />
+        {onDelete ? (
+          <Button onClick={onDelete} title="Delete"/>
+        ) : (
+          <Button onClick={() => null} title="Folgen" />
+        )}
       </div>
       <div className={styles.description}>{description}</div>
       <Video src={videoUrl} />

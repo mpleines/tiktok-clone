@@ -4,8 +4,8 @@ import Post from '../components/Post/Post';
 import useSWR from 'swr';
 import { Post as PostType } from '@prisma/client';
 import RouteGuard from '../components/RouteGuard/RouteGuard';
+import { fetcher } from '../services/ApiService';
 
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 const Home: NextPage = () => {
   const { data, error } = useSWR<PostType[]>('/api/posts', fetcher);
