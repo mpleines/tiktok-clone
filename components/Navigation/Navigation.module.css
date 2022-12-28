@@ -24,7 +24,14 @@
   gap: 16px;
 }
 
-.avatarLink {
+.avatarButton {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.iconLink {
   display: flex;
   align-items: center;
+  gap: 8px;
 }

@@ -1,11 +1,12 @@
-import { useSession } from 'next-auth/react';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { FunctionComponent } from 'react';
-import Avatar from '../Avatar/Avatar';
-import Button from '../Button/Button';
-import MaxWidth from '../MaxWidth/MaxWidth';
-import styles from './Navigation.module.css';
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import { FunctionComponent } from "react";
+import Avatar from "../Avatar/Avatar";
+import Button from "../Button/Button";
+import Dropdown from "../Dropdown/Dropdown";
+import MaxWidth from "../MaxWidth/MaxWidth";
+import styles from "./Navigation.module.css";
+import { FiSettings, FiUser } from "react-icons/fi";
 
 interface NavigationProps {
   openLoginModal: () => void;
@@ -29,11 +30,33 @@ const Navigation: FunctionComponent<NavigationProps> = ({ openLoginModal }) => {
               <>
                 <Button
                   title="Hochladen"
-                  onClick={() => router.push('/upload')}
+                  onClick={() => router.push("/upload")}
                 />
-                <Link href="/settings" className={styles.avatarLink}>
-                  <Avatar />
-                </Link>
+                <Dropdown
+                  MenuButton={
+                    <button className={styles.avatarButton}>
+                      <Avatar />
+                    </button>
+                  }
+                  links={[
+                    {
+                      href: "/myposts",
+                      label: (
+                        <div className={styles.iconLink}>
+                          <FiUser /> Profile
+                        </div>
+                      ),
+                    },
+                    {
+                      href: "/settings",
+                      label: (
+                        <div className={styles.iconLink}>
+                          <FiSettings /> Settings
+                        </div>
+                      ),
+                    },
+                  ]}
+                />
               </>
             )}
           </div>

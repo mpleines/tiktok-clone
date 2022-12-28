@@ -6,9 +6,8 @@ import { Post as PostType } from '@prisma/client';
 import RouteGuard from '../components/RouteGuard/RouteGuard';
 import { fetcher } from '../services/ApiService';
 
-
 const Home: NextPage = () => {
-  const { data, error } = useSWR<PostType[]>('/api/posts', fetcher);
+  const { data, error } = useSWR<PostType[]>("/api/posts", fetcher);
 
   if (error) return <span>Error</span>;
 
@@ -19,7 +18,7 @@ const Home: NextPage = () => {
         {data?.map((post) => (
           <Post
             key={post.id}
-            author={post.authorName ?? ''}
+            author={post.authorName ?? ""}
             description={post.description}
             videoUrl={post.videoUrl}
           />

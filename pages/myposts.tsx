@@ -12,9 +12,9 @@ const MyPosts: FunctionComponent = () => {
   const userId = data?.user?.id as string;
   const { data: posts, error, } = useSWR<PostType[]>(userId ? ['/api/posts', userId] : null, fetcher);
 
-  const deletePost = async (postId: string) => {
-    fetch(`api/posts/${postId}`, { method: 'DELETE' });
-  }
+  const deletePost = async (postId: Number) => {
+    fetch(`api/posts/${postId}`, { method: "DELETE" });
+  };
 
   return (
     <RouteGuard>
