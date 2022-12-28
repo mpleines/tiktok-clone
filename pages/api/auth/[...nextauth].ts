@@ -76,6 +76,7 @@ export default NextAuth({
           name: user.name,
           email: user.email,
           username: createRandomUserName(),
+          avatar: user.image,
         },
       });
 

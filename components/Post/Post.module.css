@@ -9,15 +9,11 @@
   align-items: center;
 }
 
-.author {
+.authorName {
   font-weight: 700;
-  margin: 0 0 8px 0;
 }
 
 .description {
   margin-bottom: 12px;
 }
 
-.link:hover {
-  text-decoration: underline;
-}

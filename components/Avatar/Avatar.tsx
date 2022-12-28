@@ -1,26 +1,26 @@
-import { useSession } from 'next-auth/react';
-import Image from 'next/image';
-import { FunctionComponent } from 'react';
-import styles from './Avatar.module.css';
-import Placeholder from './placeholder.png';
+import Image from "next/image";
+import { FunctionComponent } from "react";
+import styles from "./Avatar.module.css";
+import Placeholder from "./placeholder.png";
 
 interface AvatarProps {
-  imgSrc?: string;
+  avatarUrl: string | null | undefined;
+  size?: "medium" | "large";
 }
 
-const Avatar: FunctionComponent<AvatarProps> = ({ imgSrc = Placeholder }) => {
-  const session = useSession();
-  const { image } = session.data?.user;
-
-  const img = session.status === 'loading' ? undefined : image ? image : imgSrc;
+const Avatar: FunctionComponent<AvatarProps> = ({
+  avatarUrl,
+  size = "medium",
+}) => {
+  const img = avatarUrl ?? Placeholder;
 
   return (
     <Image
       alt="User Avatar"
       src={img}
       className={styles.wrapper}
-      width="32"
-      height="32"
+      width={size === "large" ? "64" : "32"}
+      height={size === "large" ? "64" : "32"}
     />
   );
 };

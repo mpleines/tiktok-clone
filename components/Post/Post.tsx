@@ -1,40 +1,44 @@
-import Link from 'next/link';
-import { FunctionComponent } from 'react';
-import Button from '../Button/Button';
-import Video from '../Video/Video';
-import styles from './Post.module.css';
+import { Post } from "@prisma/client";
+import Link from "next/link";
+import { FunctionComponent } from "react";
+import Avatar from "../Avatar/Avatar";
+import Button from "../Button/Button";
+import UserInfo from "../UserInfo/UserInfo";
+import Video from "../Video/Video";
+import styles from "./Post.module.css";
 
 interface PostProps {
-  description: string;
-  videoUrl: string;
-  author?: string;
-  tags?: string[];
+  post: Post;
+  avatarUrl?: string;
   onDelete?: () => void;
+  withHeader?: boolean;
 }
 
 const Post: FunctionComponent<PostProps> = ({
-  description,
-  author,
-  videoUrl,
+  post,
   onDelete,
-  tags,
+  avatarUrl,
+  withHeader = true,
 }) => {
   return (
     <div className={styles.wrapper}>
-      <div className={styles.header}>
-        <h3 className={styles.author}>
-          <Link href="" className={styles.link}>
-            {author}
-          </Link>
-        </h3>
-        {onDelete ? (
-          <Button onClick={onDelete} title="Delete"/>
-        ) : (
-          <Button onClick={() => null} title="Folgen" />
-        )}
-      </div>
-      <div className={styles.description}>{description}</div>
-      <Video src={videoUrl} />
+      {withHeader && (
+        <div className={styles.header}>
+          <UserInfo
+            authorId={post.authorId!}
+            authorName={post.authorName!}
+            avatarUrl={avatarUrl}
+          />
+          {onDelete ? (
+            <Button onClick={onDelete} title="Delete" />
+          ) : (
+            <Button onClick={() => null} title="Follow" />
+          )}
+        </div>
+      )}
+
+      <div className={styles.description}>{post.description}</div>
+      <Video src={post.videoUrl} />
     </div>
   );
 };

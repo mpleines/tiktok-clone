@@ -1,0 +1,9 @@
+.userLink {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.userLink:hover {
+  text-decoration: underline;
+}

@@ -16,6 +16,9 @@ const Navigation: FunctionComponent<NavigationProps> = ({ openLoginModal }) => {
   const session = useSession();
   const router = useRouter();
 
+  const userId = session.data?.user.id;
+  const avatarUrl = session.data?.user.image;
+
   return (
     <nav className={styles.wrapper}>
       <MaxWidth>
@@ -29,18 +32,18 @@ const Navigation: FunctionComponent<NavigationProps> = ({ openLoginModal }) => {
             ) : (
               <>
                 <Button
-                  title="Hochladen"
+                  title="Upload a Video"
                   onClick={() => router.push("/upload")}
                 />
                 <Dropdown
                   MenuButton={
                     <button className={styles.avatarButton}>
-                      <Avatar />
+                      <Avatar avatarUrl={avatarUrl} />
                     </button>
                   }
                   links={[
                     {
-                      href: "/myposts",
+                      href: `/profile/${userId}`,
                       label: (
                         <div className={styles.iconLink}>
                           <FiUser /> Profile
