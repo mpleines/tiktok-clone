@@ -1,7 +1,5 @@
-import { PrismaClient } from '@prisma/client';
-import { NextApiRequest, NextApiResponse } from 'next';
-
-const prisma = new PrismaClient();
+import { NextApiRequest, NextApiResponse } from "next";
+import { prisma } from "../../../db/prisma";
 
 export default async function handler(
   req: NextApiRequest,
@@ -9,8 +7,10 @@ export default async function handler(
 ) {
   const { postid } = req.query;
 
-  if (req.method === 'DELETE') {
-    const response = await prisma.post.delete({ where: { id: Number(postid) } })
+  if (req.method === "DELETE") {
+    const response = await prisma.post.delete({
+      where: { id: Number(postid) },
+    });
     return res.status(200).send(response);
   }
 }
