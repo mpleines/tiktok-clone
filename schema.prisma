@@ -17,15 +17,17 @@ model User {
   username  String?
   avatar    String?
   posts     Post[]
+  followedBy User[]  @relation("UserFollows")
+  following  User[]  @relation("UserFollows")
 }
 
 model Post {
-    id          Int         @id @default(autoincrement())
-    createdAt   DateTime    @default(now())
-    updatedAt   DateTime    @updatedAt
-    description String      @db.VarChar(255)
-    videoUrl    String
-    author      User?       @relation(fields: [authorId], references: [id])
-    authorId    Int?
-    authorName  String?
+  id          Int         @id @default(autoincrement())
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  description String      @db.VarChar(255)
+  videoUrl    String
+  author      User?       @relation(fields: [authorId], references: [id])
+  authorId    Int?
+  authorName  String?
 }
