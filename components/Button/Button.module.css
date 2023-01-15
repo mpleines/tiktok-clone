@@ -4,6 +4,9 @@
   background: white;
   border-radius: 5px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .primary {

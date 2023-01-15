@@ -1,45 +1,45 @@
-import NextAuth from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
-import { prisma } from "../../../db/prisma";
+import NextAuth from 'next-auth';
+import GoogleProvider from 'next-auth/providers/google';
+import { prisma } from '../../../db/prisma';
 
 const userNameChars = [
-  "a",
-  "b",
-  "c",
-  "d",
-  "e",
-  "f",
-  "g",
-  "h",
-  "i",
-  "j",
-  "k",
-  "l",
-  "m",
-  "n",
-  "o",
-  "p",
-  "q",
-  "r",
-  "s",
-  "t",
-  "u",
-  "v",
-  "w",
-  "x",
-  "y",
-  "z",
+  'a',
+  'b',
+  'c',
+  'd',
+  'e',
+  'f',
+  'g',
+  'h',
+  'i',
+  'j',
+  'k',
+  'l',
+  'm',
+  'n',
+  'o',
+  'p',
+  'q',
+  'r',
+  's',
+  't',
+  'u',
+  'v',
+  'w',
+  'x',
+  'y',
+  'z',
 ];
 const userNameNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const createRandomUserName = () => {
   return `${Array.from(Array(6).keys())
     .map(() => userNameChars[Math.floor(Math.random() * userNameChars.length)])
-    .join("")}${Array.from(Array(4).keys())
+    .join('')}${Array.from(Array(4).keys())
     .map(
       () => userNameNumbers[Math.floor(Math.random() * userNameNumbers.length)]
     )
-    .join("")}`;
+    .join('')}`;
 };
 
 export default NextAuth({
@@ -84,12 +84,13 @@ export default NextAuth({
     },
     async session({ session }) {
       if (session.user == null) {
+        console.error('user is null: ', session.user);
         return session;
       }
 
       const existingUser = await prisma.user.findUnique({
         where: { email: session.user.email },
-        include: { posts: true },
+        include: { followedBy: true, following: true },
       });
 
       if (existingUser?.username == null) {
@@ -98,10 +99,7 @@ export default NextAuth({
 
       session.user = {
         ...session.user,
-        id: existingUser.id,
-        username: existingUser?.username,
-        fullname: existingUser.name,
-        posts: existingUser.posts,
+        ...existingUser,
       };
 
       return session;

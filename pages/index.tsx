@@ -2,23 +2,27 @@ import type { NextPage } from 'next';
 import Page from '../components/Page/Page';
 import Post from '../components/Post/Post';
 import useSWR from 'swr';
-import { Post as PostType, User } from "@prisma/client";
-import RouteGuard from "../components/RouteGuard/RouteGuard";
-import { fetcher } from "../services/ApiService";
+import { Post as PostType, User } from '@prisma/client';
+import RouteGuard from '../components/RouteGuard/RouteGuard';
+import { fetcher } from '../services/ApiService';
+import { reloadSession } from '../helpers/reloadSession';
 
 const Home: NextPage = () => {
   const { data: posts, error: postsError } = useSWR<PostType[]>(
-    "/api/posts",
+    '/api/posts',
     fetcher
   );
-  const { data: users, error: usersError } = useSWR<User[]>(
-    "/api/profile",
+  const { data: users, error: usersError, mutate } = useSWR<User[]>(
+    '/api/profile',
     fetcher
   );
+
+  const follow = async (userId: number) => {
+    await fetch(`/api/profile/follow/${userId}`);
+    reloadSession();
+  };
 
   if (postsError || usersError) return <span>Error</span>;
-
-  console.log(users);
 
   return (
     <RouteGuard>
@@ -29,6 +33,7 @@ const Home: NextPage = () => {
             key={post.id}
             post={post}
             avatarUrl={users?.find((user) => user.id === post.authorId)?.avatar}
+            onFollow={(userId) => follow(userId)}
           />
         ))}
       </Page>
