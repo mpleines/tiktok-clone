@@ -1,5 +1,5 @@
-import { Post } from '@prisma/client';
-import { Session } from 'inspector';
+import { Post, User } from '@prisma/client';
+import { DefaultSession } from 'inspector';
 import NextAuth from 'next-auth';
 
 declare module 'next-auth' {
@@ -7,7 +7,8 @@ declare module 'next-auth' {
     user: {
       username: string;
       fullname: string;
-      posts: Post[];
-    } & Session['user'];
+      followedBy: User[];
+      following: User[];
+    } & DefaultSession['user'];
   }
 }

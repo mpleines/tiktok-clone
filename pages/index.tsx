@@ -2,33 +2,28 @@ import type { NextPage } from 'next';
 import Page from '../components/Page/Page';
 import Post from '../components/Post/Post';
 import useSWR from 'swr';
-import { Post as PostType, User } from "@prisma/client";
-import RouteGuard from "../components/RouteGuard/RouteGuard";
-import { fetcher } from "../services/ApiService";
-import { useSession } from "next-auth/react";
-import { prisma } from '../db/prisma';
+import { Post as PostType, User } from '@prisma/client';
+import RouteGuard from '../components/RouteGuard/RouteGuard';
+import { fetcher } from '../services/ApiService';
+import { reloadSession } from '../helpers/reloadSession';
 
 const Home: NextPage = () => {
-  const session = useSession();
-  const sessionUser = session?.data?.user;
-
   const { data: posts, error: postsError } = useSWR<PostType[]>(
-    "/api/posts",
+    '/api/posts',
     fetcher
   );
-  const { data: users, error: usersError } = useSWR<User[]>(
-    "/api/profile",
+  const { data: users, error: usersError, mutate } = useSWR<User[]>(
+    '/api/profile',
     fetcher
   );
 
-  const user = users?.find((user) => user.id === sessionUser.id);
-  const isFollowing = prisma.user.
-
-  const follow = (userId: number) => {
-    fetch(`/api/profile/follow/${userId}`);
+  const follow = async (userId: number) => {
+    await fetch(`/api/profile/follow/${userId}`);
+    reloadSession();
   };
 
   if (postsError || usersError) return <span>Error</span>;
+
   return (
     <RouteGuard>
       <Page>
@@ -38,7 +33,6 @@ const Home: NextPage = () => {
             key={post.id}
             post={post}
             avatarUrl={users?.find((user) => user.id === post.authorId)?.avatar}
-            isFollowing={}
             onFollow={(userId) => follow(userId)}
           />
         ))}

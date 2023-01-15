@@ -1,18 +1,19 @@
-import { Post } from "@prisma/client";
-import { useSession } from "next-auth/react";
-import Link from "next/link";
-import { FunctionComponent } from "react";
-import Avatar from "../Avatar/Avatar";
-import Button from "../Button/Button";
-import UserInfo from "../UserInfo/UserInfo";
-import Video from "../Video/Video";
-import styles from "./Post.module.css";
+import { Post } from '@prisma/client';
+import { useSession } from 'next-auth/react';
+import Link from 'next/link';
+import { FunctionComponent } from 'react';
+import Avatar from '../Avatar/Avatar';
+import Button from '../Button/Button';
+import UserInfo from '../UserInfo/UserInfo';
+import Video from '../Video/Video';
+import styles from './Post.module.css';
+import { FiCheck } from 'react-icons/fi';
+import { useIsFollowing } from '../../hooks/useIsFollowing';
 
 interface PostProps {
   post: Post;
   avatarUrl?: string;
   onDelete?: () => void;
-  isFollowing?: boolean;
   onFollow?: (userId: number) => void;
   withHeader?: boolean;
 }
@@ -23,8 +24,11 @@ const Post: FunctionComponent<PostProps> = ({
   onFollow,
   avatarUrl,
   withHeader = true,
-  isFollowing = false,
 }) => {
+  const user = useSession().data?.user;
+  const isFollowing = useIsFollowing(post.authorId!);
+  const isOwnPost = user?.id === post?.authorId;
+
   return (
     <div className={styles.wrapper}>
       {withHeader && (
@@ -34,14 +38,13 @@ const Post: FunctionComponent<PostProps> = ({
             authorName={post.authorName!}
             avatarUrl={avatarUrl}
           />
-          {onDelete ? (
+          {isOwnPost ? null : onDelete ? (
             <Button onClick={onDelete} title="Delete" />
-          ) : isFollowing ? (
-            <span>Following</span>
           ) : (
             <Button
               onClick={() => post.authorId && onFollow?.(post.authorId)}
-              title="Follow"
+              title={isFollowing ? 'Following' : 'Follow'}
+              icon={isFollowing ? <FiCheck /> : null}
             />
           )}
         </div>
