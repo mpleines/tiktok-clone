@@ -32,7 +32,9 @@ const Home: NextPage = () => {
           <Post
             key={post.id}
             post={post}
-            avatarUrl={users?.find((user) => user.id === post.authorId)?.avatar}
+            avatarUrl={
+              users?.find((user) => user.id === post.authorId)?.avatar!
+            }
             onFollow={(userId) => follow(userId)}
           />
         ))}
