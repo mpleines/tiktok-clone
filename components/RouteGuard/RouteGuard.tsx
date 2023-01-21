@@ -1,6 +1,6 @@
 import { useSession } from 'next-auth/react';
 import { FunctionComponent, ReactNode } from 'react';
-import Welcome from '../Welcome/welcome';
+import Welcome from '../Welcome/Welcome';
 
 interface RouteGuardProps {
   children: ReactNode;
