@@ -1,12 +1,12 @@
 datasource db {
   url      = env("DATABASE_URL")
   provider = "mysql"
+  relationMode = "prisma"
 }
 
 generator client {
   provider = "prisma-client-js"
 }
-
 
 model User {
   id        Int      @id @default(autoincrement())
