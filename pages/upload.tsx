@@ -1,6 +1,12 @@
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import { ChangeEvent, FunctionComponent, useId, useState } from 'react';
+import {
+  ChangeEvent,
+  FunctionComponent,
+  useId,
+  useMemo,
+  useState,
+} from 'react';
 import Button from '../components/Button/Button';
 import Camera from '../components/Camera/Camera';
 import Input from '../components/Input/Input';
@@ -15,16 +21,23 @@ export function toBase64(file: Blob): Promise<string> {
     reader.onload = () => resolve((reader.result as string).split(',')[1]);
     reader.onerror = (error) => reject(error);
   });
-};
+}
 
 const Upload: FunctionComponent<UploadProps> = () => {
   const session = useSession();
-  const [description, setDescription] = useState<string>();
+  const [description, setDescription] = useState<string>('');
   const [videoBlob, setVideoBlob] = useState<Blob>();
-  const [uploadingState, setUploadingState] = useState<'loading' | 'error' | 'success'>();
+  const [uploadingState, setUploadingState] = useState<
+    'loading' | 'error' | 'success'
+  >();
   const [showCamera, setShowCamera] = useState(false);
   const id = useId();
   const router = useRouter();
+
+  const videoUrl = useMemo(
+    () => (videoBlob ? URL.createObjectURL(videoBlob) : undefined),
+    [videoBlob]
+  );
 
   const handleUpload = async () => {
     if (videoBlob == null) {
@@ -42,7 +55,7 @@ const Upload: FunctionComponent<UploadProps> = () => {
     const fileWithMeta = {
       mimeType: file.type,
       base64,
-    }
+    };
 
     setUploadingState('loading');
 
@@ -67,15 +80,43 @@ const Upload: FunctionComponent<UploadProps> = () => {
     <Page>
       <h1>Upload a Video</h1>
       <p>Upload a new Video with your account</p>
-      {videoBlob && (
-        <video src={URL.createObjectURL(videoBlob)} autoPlay loop style={{ width: '100%' }}/>
+      {videoUrl == null && (
+        <div
+          style={{
+            width: '100%',
+            height: '500px',
+            borderRadius: '5px',
+            background: 'var(--grey)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginBottom: '16px',
+          }}
+        >
+          <Button title="Record a Video" onClick={() => setShowCamera(true)} />
+        </div>
       )}
-      <Input label="Beschreibung" onChange={setDescription} />
+      {videoUrl != null && (
+        <video
+          src={videoUrl}
+          autoPlay
+          loop
+          style={{ width: '100%', marginBottom: '16px' }}
+        />
+      )}
+      <Input
+        label="Beschreibung"
+        onChange={setDescription}
+        value={description}
+      />
       {showCamera && (
-        <Camera showCamera={showCamera} onCancel={() => setShowCamera(false)} handleChange={setVideoBlob} />
+        <Camera
+          showCamera={showCamera}
+          onCancel={() => setShowCamera(false)}
+          handleChange={setVideoBlob}
+        />
       )}
       <div style={{ display: 'flex', gap: '8px' }}>
-        <Button title="Record a Video" onClick={() => setShowCamera(true)} />
         <Button title="Post Video" onClick={handleUpload} />
       </div>
       {uploadingState === 'loading' && <span>Loading</span>}

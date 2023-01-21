@@ -2,8 +2,8 @@ import { FunctionComponent, ReactNode } from 'react';
 import styles from './Input.module.css';
 
 interface InputProps {
-  value?: string;
-  onChange: (value?: string) => void;
+  value: string;
+  onChange: (value: string) => void;
   type?: 'text' | 'email' | 'password';
   label?: string;
 }
